@@ -18,32 +18,6 @@ const Home = () => {
     };
     fetchData();
   }, [cat]);
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     title: "Lorem Ipsum falan filan",
-  //     desc: "Lorem Ipsum falan filan",
-  //     img: "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-kadin-model-ayakta-genc.jpeg",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Lorem Ipsum falan filan",
-  //     desc: "Lorem Ipsum falan filan",
-  //     img: "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-kadin-model-ayakta-genc.jpeg",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Lorem Ipsum falan filan",
-  //     desc: "Lorem Ipsum falan filan",
-  //     img: "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-kadin-model-ayakta-genc.jpeg",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Lorem Ipsum falan filan",
-  //     desc: "Lorem Ipsum falan filan",
-  //     img: "https://images.pexels.com/photos/19486301/pexels-photo-19486301/free-photo-of-kadin-model-ayakta-genc.jpeg",
-  //   },
-  // ];
 
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -53,21 +27,23 @@ const Home = () => {
   return (
     <div className="home">
       <div className="posts">
-        {posts.map((post) => (
-          <div className="post" key={post.id}>
-            <div className="img">
-              <img src={`./upload/${post.img}`} alt="" />
-            </div>
-            <div className="content">
-              <Link className="link" to={`/post/${post.id}`}>
-                <h1>{post.title}</h1>
-              </Link>
+        {posts
+          .sort((a, b) => b.id - a.id)
+          .map((post) => (
+            <div className="post" key={post.id}>
+              <div className="img">
+                <img src={`./upload/${post.img}`} alt="" />
+              </div>
+              <div className="content">
+                <Link className="link" to={`/post/${post.id}`}>
+                  <h1>{post.title}</h1>
+                </Link>
 
-              <p>{getText(post.desc)}</p>
-              <button>Read More</button>
+                <p>{getText(post.desc)}</p>
+                <button>Read More</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
